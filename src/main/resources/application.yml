@@ -1,0 +1,16 @@
+server:
+  port: 8080  # ??
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/blog?useUnicode=true&characterEncoding=utf8
+    username: have4
+    password: kht000603  # ??MySQL??
+  redis:
+    host: localhost
+    port: 6379
+  thymeleaf:
+    cache: false  # ??????????????
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml  #  mapper.xml??
+  type-aliases-package: com.example.blog.entity  # ?????
