@@ -1,0 +1,15 @@
+/* 引入Tailwind（通过CDN的话，这里只放自定义配置） */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 自定义Tailwind主题（如果不用CDN，需要配合tailwind.config.js，这里用CDN的话保持和之前一致） */
+/* 自定义工具类 */
+@layer utilities {
+    .form-input-focus {
+        @apply border-primary ring-2 ring-primary/20 transition-all duration-300;
+    }
+    .btn-hover {
+        @apply transform hover:scale-105 transition-transform duration-300;
+    }
+}
