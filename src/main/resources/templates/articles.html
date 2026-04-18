@@ -2,12 +2,64 @@
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我的博客 - 文章列表</title>
+    <!-- 引入Tailwind和公共样式 -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                    },
+                },
+            }
+        }
+    </script>
 </head>
-<body class="p-8">
-<h1 class="text-2xl font-bold mb-6">我的文章列表</h1>
-<p>登录成功！这里是文章列表页~</p>
-<a href="/login.html" class="text-blue-500 hover:underline mt-4 inline-block">退出登录</a>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-4 md:p-8">
+<!-- 顶部导航 -->
+<div class="max-w-5xl mx-auto mb-8 flex justify-between items-center">
+    <h1 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-gray-800">我的博客</h1>
+    <div class="flex gap-6">
+        <a href="/articles.html" class="text-primary font-medium">文章列表</a>
+        <a href="/profile.html" class="text-gray-600 hover:text-primary transition-colors">个人中心</a>
+        <a href="/login.html" class="text-gray-600 hover:text-primary transition-colors">退出登录</a>
+    </div>
+</div>
+
+<!-- 主内容区 -->
+<div class="max-w-5xl mx-auto bg-white rounded-xl shadow-lg p-6 md:p-8">
+    <!-- 操作栏 -->
+    <div class="mb-6 flex justify-end">
+        <button class="bg-secondary text-white px-4 py-2 rounded-lg btn-hover">
+            发布新文章
+        </button>
+    </div>
+
+    <!-- 文章列表标题 -->
+    <h2 class="text-xl font-semibold text-gray-800 mb-4">我的文章列表</h2>
+
+    <!-- 示例文章卡片（后续可从数据库读取） -->
+    <div class="border border-gray-200 rounded-lg p-4 mb-4 hover:shadow-md transition-shadow">
+        <div class="flex justify-between items-start">
+            <h3 class="text-lg font-medium text-primary">示例文章标题</h3>
+            <span class="text-sm text-gray-500">2026-04-18</span>
+        </div>
+        <p class="text-gray-600 mt-2 line-clamp-2">这是一篇示例文章的内容简介，后续可以从数据库中读取真实的文章内容展示在这里...</p>
+        <div class="mt-3 flex gap-2">
+            <button class="text-sm text-primary hover:underline">编辑</button>
+            <button class="text-sm text-red-500 hover:underline">删除</button>
+        </div>
+    </div>
+
+    <!-- 空状态提示（如果没有文章） -->
+    <div class="text-center py-8 text-gray-500" th:if="${#lists.isEmpty(articles)}">
+        <p>你还没有发布任何文章，点击“发布新文章”开始创作吧~</p>
+    </div>
+</div>
 </body>
 </html>

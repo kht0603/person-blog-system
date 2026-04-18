@@ -45,4 +45,9 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
+    @Override
+    public void updateById(User user) {
+        userMapper.updateById(user); // 调用Mapper的更新方法
+    }
 }

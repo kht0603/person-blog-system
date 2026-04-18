@@ -7,4 +7,5 @@ public interface UserService {
     void save(User user);
     // 后续可以加登录方法
     User login(String username, String password);
+    void updateById(User user); // 新增更新方法
 }

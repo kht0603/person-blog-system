@@ -53,6 +53,9 @@
             >
         </div>
 
+        <!-- 在登录表单上方加这个 -->
+        <div th:if="${not #strings.isEmpty(msg)}" class="text-red-500 text-sm mb-4" th:text="${msg}"></div>
+
         <!-- 登录按钮 -->
         <button
                 type="submit"

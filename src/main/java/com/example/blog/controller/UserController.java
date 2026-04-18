@@ -6,7 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 
 @Controller
 public class UserController {
@@ -49,17 +55,28 @@ public class UserController {
 
     // 处理登录请求
     @PostMapping("/login")
-    public String doLogin(String username, String password, RedirectAttributes redirectAttributes) {
+    public String doLogin(
+            @RequestParam("username") String username,
+            @RequestParam("password") String password,
+            HttpSession session,
+            RedirectAttributes redirectAttributes) {
         try {
             User user = userService.login(username, password);
             if (user == null) {
                 throw new RuntimeException("用户名或密码错误！");
             }
-            // （后续可以加Session保存登录状态）
-            return "redirect:/articles.html"; // 登录成功跳文章列表页
+            // 存入Session标记登录状态
+            session.setAttribute("loginUser", user);
+            return "redirect:/articles.html"; // 登录成功跳文章页
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("msg", "登录失败：" + e.getMessage());
-            return "redirect:/login.html";
+            redirectAttributes.addFlashAttribute("msg", e.getMessage());
+            return "redirect:/login.html"; // 失败跳回登录页
         }
+    }
+
+    // 显示个人中心页面
+    @GetMapping("/profile.html")
+    public String showProfilePage() {
+        return "profile"; // 对应templates/profile.html
     }
 }

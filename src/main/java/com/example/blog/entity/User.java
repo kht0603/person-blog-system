@@ -13,4 +13,6 @@ public class User {
     private String password;
     private String nickname;
     private LocalDateTime createTime;
+    private String avatar;
+    private String intro;
 }
